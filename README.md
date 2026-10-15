@@ -27,10 +27,4 @@ docs/
   apps/               Escapepod / wire-pod
   changelog.md        dated change log
   open-items.md       what's still unresolved
-scripts/
-  check-sensitive.sh  pre-push scan for anything that shouldn't be public
 ```
-
-## Before pushing changes
-
-Run `scripts/check-sensitive.sh` from the repo root. It flags real-looking private and Tailscale addresses, MAC addresses, email addresses and secrets, plus any personal terms listed in a local `.sensitive-patterns` file (that file is gitignored and never committed).
