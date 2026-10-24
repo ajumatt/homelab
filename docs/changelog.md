@@ -1,14 +1,46 @@
 # Changelog
 
+## 2026-10-23
+
+- Linkwarden joined to Tailscale (TUN passthrough on its LXC).
+- Linkwarden published at `links.example.com` through the existing tunnel.
+- Cloudflare Zero Trust Free set up; Access application with a one-email allow policy and one-time PIN login in front of Linkwarden.
+
+## 2026-10-19
+
+- AP 1 found to have never served an IoT client. Moved its 2.4 GHz channel twice and removed Wi-Fi 7 elements from its 2.4 GHz beacons; neither helped.
+- IoT SSID turned off on AP 1 only. A stuck smart plug joined AP 2 within a minute. Later disabled AP 1's 2.4 GHz radio entirely.
+- AP 4 (EAP653) adopted on switch port 3 as an IoT-only AP: 2.4 GHz ch 1, 18 dBm, main SSID overridden off, reservation at .14.
+- Client event logging turned on in Omada (connection failed, roaming, offline, online).
+- AdGuard DNS rewrite `escapepod.local` to 10.10.1.110 so Vector on the IoT VLAN can find wire-pod.
+
+## 2026-10-18
+
+- Vector moved to the IoT SSID at 10.10.100.50. Updated the cached robot IP in wire-pod's `botSdkInfo.json`.
+
 ## 2026-10-13
 
 - IoT SSID encryption changed from Auto (TKIP+AES) to AES only while troubleshooting a smart plug that wouldn't join.
-- Splunk Enterprise LXC added on pve3 at .50.
+- Splunk Enterprise on pve3 (LXC 108) with a manual fix for the helper script's systemd unit name. Moved its reservation out of the DHCP pool to .50.
 
 ## 2026-10-12
 
 - Turned off AI Roaming and Non-Stick Roaming at the site level. AI Roaming was putting AP 3's 2.4 GHz radio into client admission restriction and refusing IoT joins.
 - Main SSID confirmed 5/6 GHz only.
+
+## 2026-10-09
+
+- Entra Cloud Sync device sync turned on. Domain PCs hybrid joined.
+- Nextcloud registered as an Entra app for OIDC; `user_oidc` installed.
+
+## 2026-10-08
+
+- Entra ID tenant created with cloud-only admin and break-glass accounts. Public domain verified, UPN suffix added in AD.
+- Removed a failed Entra Connect install from DC01. Cloud Sync agent installed on DC02, group-scoped, password hash sync. Pilot account first, then real users.
+
+## 2026-10-06 to 2026-10-07
+
+- SavaPage on pve3 (LXC 124) with PostgreSQL, localhost-only CUPS, and LDAP sync from a security group. Service account and DNS record created on DC01.
 
 ## 2026-10-02
 

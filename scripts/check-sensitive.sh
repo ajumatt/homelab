@@ -29,7 +29,7 @@ check "Tailscale CGNAT addresses" '\b100\.(6[4-9]|[7-9][0-9]|1[01][0-9]|12[0-7])
   '100\.100\.100\.100|100\.64\.0\.0/10'
 check "Tailnet names" '\.ts\.net\b'
 check "MAC addresses" '\b([0-9a-f]{2}[:-]){5}[0-9a-f]{2}\b'
-check "Email addresses" '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}'
+check "Email addresses" '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}' '@example\.(com|net)'
 check "UUIDs (tunnel IDs, account IDs)" '\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b'
 check "Secrets" '(password|passwd|secret|token|api[_-]?key)\s*[:=]\s*\S+|BEGIN [A-Z ]*PRIVATE KEY'
 

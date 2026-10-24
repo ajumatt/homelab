@@ -6,10 +6,36 @@ VM 103 on pve, Ubuntu 26.04 LTS, hostname `escapepod.local`, 10.10.1.110. Runs [
 
 ## Vector on the IoT VLAN
 
-Vector is moving from the main SSID to IoT. Two problems to solve:
+Vector joined the IoT SSID on 2026-10-18 and sits at 10.10.100.50 (previously 10.10.1.72 on Default). Earlier join attempts never got as far as showing up as a client; that cleared up around the time AI Roaming was turned off and the IoT SSID went AES-only. It's on AP 4 now.
 
-1. It currently fails to join the IoT SSID at all and never shows up as a client, which points at Wi-Fi association rather than DHCP. The AI Roaming admission restriction described in [Wi-Fi](../network/wifi.md#roaming-features) was one cause of IoT join failures.
-2. Once it's on VLAN 100, it has to find escapepod on VLAN 1. The firewall side is done (IoT is allowed to reach .110). Discovery may need an mDNS rule, or the server address set by IP in wire-pod's bot setup.
+Moving it broke wire-pod in two separate ways.
+
+### Stale bot IP
+
+wire-pod caches each paired robot's address in `chipper/jdocs/botSdkInfo.json`. After the move, every outbound call to the robot (TTS, event stream) failed with `dial tcp 10.10.1.72:443: connect: no route to host`.
+
+```
+sudo systemctl stop wire-pod
+# edit chipper/jdocs/botSdkInfo.json: set the bot's ip_address to 10.10.100.50
+sudo systemctl start wire-pod
+sudo journalctl -u wire-pod -f
+```
+
+After that, escapepod reaches the robot on TCP 443 (`nc` connects; ping doesn't answer, which is normal for Vector).
+
+Vector's address is still an unreserved lease inside the IoT pool. If it changes, this breaks again the same way. It needs an IoT DHCP reservation.
+
+### Robot can't find the server
+
+wire-pod announces `escapepod.local` by mDNS, and mDNS doesn't cross VLANs. The firewall already lets IoT reach .110, but the robot never resolves the name, so the wire-pod log shows only its own outbound connection loop and nothing inbound from the robot.
+
+Options considered:
+
+- A second NIC on VM 103 tagged for VLAN 100, so wire-pod announces itself on the IoT side too. Decided against it.
+- An AdGuard DNS rewrite, `escapepod.local` to 10.10.1.110, added on the primary (syncs to the secondary). Works only if Vector falls back to unicast DNS for `.local` names. In place, not yet confirmed working.
+- Fallback if the rewrite doesn't work: a hidden 2.4 GHz SSID on the Default network on AP 4, MAC-filtered to the robot.
+
+Still unverified end to end: voice commands and SDK features after both fixes.
 
 ## Recognition feature (local patch)
 

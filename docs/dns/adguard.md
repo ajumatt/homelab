@@ -32,6 +32,14 @@ Both instances have this upstream above the Quad9 line (Settings > DNS settings)
 
 Before that, queries for the AD domain went to Quad9 and failed. Verified from a Windows client with `Resolve-DnsName -Server <adguard> -DnsOnly` for both DC A records and `_ldap._tcp.dc._msdcs.home.lan`.
 
+## Rewrites
+
+Filters > DNS rewrites, on the primary only (sync copies them):
+
+| Name | Answer | Why |
+|---|---|---|
+| `escapepod.local` | 10.10.1.110 | Lets the Vector robot on the IoT VLAN find wire-pod without mDNS. See [Escapepod](../apps/escapepod.md#robot-cant-find-the-server). |
+
 ## Retention
 
 Query log and statistics: 7 days on both.

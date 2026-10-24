@@ -25,6 +25,7 @@ pct set 122 --hostname cloudflared2
 | Hostname | Service |
 |---|---|
 | cloud.example.com | `http://10.10.1.251:11000` (Nextcloud AIO, plain HTTP, no TLS options) |
+| links.example.com | `http://10.10.1.81:3000` (Linkwarden), behind Cloudflare Access |
 
 New web services get a public hostname on this tunnel. Cloudflare creates the proxied DNS record. No port forwards.
 
@@ -32,7 +33,7 @@ Non-web services (game server, WireGuard) would need the home IP and DDNS. Nothi
 
 ## DNS records on the zone
 
-- The tunnel CNAME for `cloud`.
+- Tunnel records for `cloud` and `links`, both created by Cloudflare when the hostnames were added.
 - `TXT @ "v=spf1 -all"` and `TXT _dmarc "v=DMARC1; p=reject"`. The domain sends no mail, so receiving servers reject anything spoofing it. Update SPF and relax DMARC before ever sending mail from this domain.
 
 The root A record (pointed straight at the home IP, DNS only) and a `www` CNAME were deleted. The home IP no longer appears in public DNS.
@@ -50,3 +51,15 @@ Free plan allows one rate-limiting rule with 10-second windows:
 ```
 
 Per IP, more than 3 requests in 10 seconds blocks for 10 seconds. It covers the web login form only, not WebDAV or the desktop and mobile apps.
+
+## Cloudflare Access
+
+Zero Trust Free plan (up to 50 users, no cost), set up on 2026-10-23 for Linkwarden. The team name was auto-generated; it only shows in the login page URL and can be renamed under Zero Trust > Settings.
+
+| Application | Type | Policy |
+|---|---|---|
+| links | Self-hosted, `links.example.com` | Allow, include one email address |
+
+No identity provider is connected, so sign-in uses Cloudflare's one-time PIN sent by email. Requests to `links.example.com` redirect to the Access login before anything reaches Linkwarden.
+
+Access versus the rate limit: the free plan's single rate-limiting rule stays on Nextcloud, whose own login form is exposed behind the tunnel. Linkwarden doesn't need one, because Access blocks every unauthenticated request at Cloudflare.

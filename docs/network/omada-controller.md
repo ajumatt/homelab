@@ -14,10 +14,11 @@ Stable channel only. The controller once offered 1.7.22, which turned out to com
 | EAP787 | 1.4.3 |
 | EAP650-Desktop | 1.5.6 |
 | EAP775-Wall | 1.5.3 |
+| EAP653 | 1.3.13 (adopted 2026-10-19, update not checked yet) |
 
 ## Settings that were wrong
 
-Device Management Hostname/IP (System Settings > Device Management Access) pointed at an old address in the DHCP pool. That's where a stale Inform URL came from. It now matches the controller's own address, and all five devices stayed connected through the change. The separate Controller Hostname/IP field was already right; check both.
+Device Management Hostname/IP (System Settings > Device Management Access) pointed at an old address in the DHCP pool. That's where a stale Inform URL came from. It now matches the controller's own address, and all five devices at the time stayed connected through the change. The separate Controller Hostname/IP field was already right; check both.
 
 Daylight Saving Time was disabled, so the controller clock ran an hour behind and every log timestamp was off. Set to Auto (US rules).
 

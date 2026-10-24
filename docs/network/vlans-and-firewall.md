@@ -20,7 +20,11 @@ The "AdGuard DNS" group was a leftover named after an old address. It held no IP
 
 One rule: `_googlecast._tcp.local`, service VLAN 100, client VLAN 1. Chromecast and Google TV devices live on IoT and phones on Default still see them.
 
-The Vector robot may need a similar rule (or an IP-based server address) to find escapepod across VLANs once it moves to IoT. See [Escapepod](../apps/escapepod.md).
+There is no reflection rule for Vector. wire-pod's `escapepod.local` announcement stays on VLAN 1, and a DNS rewrite in AdGuard is being tried instead. See [Escapepod](../apps/escapepod.md#robot-cant-find-the-server).
+
+## Default to IoT
+
+No gateway ACL covers connections started from Default toward IoT. Home Assistant polling plugs and wire-pod calling the robot both depend on that path staying open.
 
 ## Switch trunk ports
 

@@ -8,7 +8,7 @@ Default pattern is an unprivileged Debian LXC. VMs only where the OS demands it 
 |---|---|---|---|---|---|---|
 | 101 | DC01 | VM, OVMF, q35, TPM 2.0 | 4c / 8 GB | 100 GB | .105 | Windows Server 2022, holds all FSMO roles |
 | 102 | HomeAssistant | VM, HAOS, OVMF | 2c / 4 GB | 32 GB | .56 | |
-| 103 | Escapepod | VM, SeaBIOS, Ubuntu | 1c / 2 GB | 10 GB | .110 | wire-pod server for Vector |
+| 103 | Escapepod | VM, SeaBIOS, Ubuntu | 1c / 2 GB | 10 GB | .110 | wire-pod server for Vector ([notes](../apps/escapepod.md)) |
 | 104 | Nextcloud | VM, Debian 13 | 4c / 8 GB | 32 GB + 1 TB data on HS-Storage | .251 | Nextcloud AIO in Docker |
 | 105 | cloudflare-ddns | LXC | 2c / 1 GB | 3 GB | .108 | |
 | 106 | cloudflared | LXC | 1c / 512 MB | 2 GB | .109 | Tunnel connector 1 |
@@ -21,7 +21,7 @@ Default pattern is an unprivileged Debian LXC. VMs only where the OS demands it 
 | 100 | grafana | LXC | 1c / 512 MB | 4 GB | .60 | |
 | 107 | docker | VM, Debian 13, cloud-init | 2c / 4 GB | 10 GB | .112 | Portainer |
 | 109 | omnitools | LXC | 2c / 2 GB | 8 GB | .114 | |
-| 110 | linkwarden | LXC, Ubuntu | 2c / 4 GB | 12 GB | .81 | TUN passthrough for Tailscale |
+| 110 | linkwarden | LXC, Ubuntu | 2c / 4 GB | 12 GB | .81 | on Tailscale and behind Cloudflare Access ([notes](../apps/linkwarden.md)) |
 | 111 | rustdeskserver | LXC | 1c / 512 MB | 2 GB | .120 | TUN passthrough for Tailscale |
 | 112 | homepage | LXC | 2c / 4 GB | 6 GB | .74 | |
 | 113 | adguard | LXC | 1c / 512 MB | 10 GB | .122 | AdGuard Home primary |
@@ -36,7 +36,8 @@ Default pattern is an unprivileged Debian LXC. VMs only where the OS demands it 
 
 | ID | Name | Type | CPU / RAM | Disk | Address | Notes |
 |---|---|---|---|---|---|---|
-| 108 | splunk | LXC | | | .50 | Splunk Enterprise |
+| 108 | splunk | LXC | | | .50 | Splunk Enterprise ([notes](../apps/splunk.md)) |
+| 124 | savapage | LXC, Debian 13 | 2c / 4 GB | 16 GB | | SavaPage print management ([notes](../apps/savapage.md)) |
 | 122 | cloudflared2 | LXC | 1c / 512 MB | 2 GB | .140 | Tunnel connector 2, restored from 106's backup |
 
 ## Notes

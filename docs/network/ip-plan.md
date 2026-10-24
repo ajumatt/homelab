@@ -4,7 +4,7 @@
 
 | Range | Use |
 |---|---|
-| .1 to .19 | Network gear: router .1, switch .2, Omada controller .5, AP 1 .11, AP 2 .12, AP 3 .13 |
+| .1 to .19 | Network gear: router .1, switch .2, Omada controller .5, AP 1 .11, AP 2 .12, AP 3 .13, AP 4 .14 |
 | .20 to .49 | Physical hosts and fixed hardware (pve .20, pve2 .21, pve3 .22) |
 | .50 to .149 | Reserved servers, VMs and fixed home devices |
 | .150 to .239 | DHCP pool, single range, 90 addresses |
@@ -12,17 +12,18 @@
 
 The pool used to be split (.50 to .100 plus .150 to .200). Collapsing it to one range above .150 freed the .50 to .149 block for reservations, so every server gets a predictable address outside the pool. One camera NVR still holds a reservation at .195 inside the pool. It isn't in use, so it stays.
 
-Network gear was moved into .1 to .19 from scattered addresses in the .50s and .60s. All four devices picked up the new reservations without re-adoption.
+Network gear was moved into .1 to .19 from scattered addresses in the .50s and .60s. All four devices picked up the new reservations without re-adoption. AP 4 came up on a pool address when it was adopted and got its reservation at .14 the same evening.
 
 ## IoT network (VLAN 100, 10.10.100.0/24)
 
-DHCP pool .10 to .100. No reservations yet; moved devices get them once the migration is done.
+DHCP pool .10 to .100. No reservations yet. Vector sits at .50 inside the pool and needs one first, since wire-pod talks to it by IP.
 
 ## Server reservations in .50 to .149
 
 | Address | Host |
 |---|---|
 | .50 | splunk (LXC on pve3) |
+| .52 | network printer (behind SavaPage) |
 | .56 | Home Assistant (VM) |
 | .60 | grafana |
 | .63 | hermesagent |
