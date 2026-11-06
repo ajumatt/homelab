@@ -16,7 +16,7 @@ All hostnames, domains, SSIDs and addresses in this repo are placeholders. The a
 | Directory | Active Directory on two Windows Server 2022 domain controllers, synced to Entra ID with Cloud Sync |
 | Monitoring | Prometheus and Alertmanager to ntfy, Grafana, Wazuh with Omada syslog, Glance and ProxCenter dashboards |
 | Remote access | Cloudflare Tunnel with two connectors, Cloudflare Access on selected apps, Tailscale for admin; no inbound web ports open |
-| Apps | Nextcloud AIO, Home Assistant, Linkwarden, SavaPage, Escapepod (wire-pod) and a handful of smaller LXC services |
+| Apps | Nextcloud AIO, Home Assistant, Linkwarden, Vaultwarden, Syncthing, IT-Tools, Escapepod (wire-pod) and a handful of smaller LXC services |
 
 ## Layout
 
@@ -32,7 +32,7 @@ docs/
   active-directory/   domain controllers, DC02 build, promotion failures
   identity/           Entra ID tenant, Cloud Sync, hybrid join, app SSO
   remote-access/      Cloudflare Tunnel and Access, Nextcloud AIO behind the tunnel
-  apps/               Escapepod (wire-pod), Linkwarden, SavaPage, Splunk (retired)
+  apps/               Escapepod (wire-pod), Linkwarden, SavaPage and Splunk (both deleted)
   runbooks/           repeatable procedures (adding a service)
   changelog.md        dated change log
   open-items.md       what's still unresolved

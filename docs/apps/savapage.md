@@ -1,4 +1,6 @@
-# SavaPage print management
+# SavaPage print management (deleted)
+
+The container was deleted in early November 2026 before the Windows rollout. These notes stay as a record of the install and its problems. If it comes back, the AD service account, security group and DNS record may need cleaning up or reusing.
 
 [SavaPage](https://www.savapage.org) 1.7.0 on pve3. Windows PCs print to a SavaPage queue instead of straight to the printer. Jobs land in each user's web inbox and get released from there.
 

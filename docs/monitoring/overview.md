@@ -40,8 +40,8 @@ Alerts don't depend on Grafana, Glance or ProxCenter being up. They do depend on
 
 ## What was retired
 
-- Homepage (CT 112). Glance already covers everything it showed. Stopped, then cleared for deletion after the 2026-11-01 backup.
-- Splunk (CT 108). Wazuh is the log destination, so Splunk had no job left. Cleared for deletion once pve3's backup was confirmed good.
+- Homepage (CT 112). Glance already covers everything it showed. Deleted after the 2026-11-01 backup.
+- Splunk (CT 108). Wazuh is the log destination, so Splunk had no job left. Deleted once pve3's backup was confirmed good.
 
 ## Secrets
 

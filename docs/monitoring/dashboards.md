@@ -42,6 +42,6 @@ It had the same cluster added three times, once per node. Two were deleted, leav
 
 See [Prometheus](prometheus.md#grafana). Node Exporter Full, Proxmox via Prometheus, and Blackbox Exporter dashboards in a Homelab folder.
 
-## Homepage (retired)
+## Homepage (deleted)
 
-CT 112 on pve2. Glance does everything it did. Stopped on 2026-10-28 and cleared for deletion after the 2026-11-01 backup.
+CT 112 on pve2. Glance does everything it did. Stopped on 2026-10-28 and deleted after the 2026-11-01 backup.

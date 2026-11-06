@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-06
+
+- Deleted Splunk (108), Homepage (112) and SavaPage (124).
+- Added it-tools, syncthing and vaultwarden containers on pve3.
+
 ## 2026-11-05
 
 - glance-helper replaces the calendar-only helper on the Glance container; adds homelab endpoints for alerts, temperatures, storage, backups, Home Assistant, Wazuh, the tunnel, Omada and certificate expiry.

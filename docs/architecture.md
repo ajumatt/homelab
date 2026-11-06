@@ -90,5 +90,4 @@ flowchart LR
   ad[AD home.lan<br/>DC01 + DC02] -->|Cloud Sync agent on DC02<br/>group-scoped, password hash sync| entra[Entra ID tenant]
   pcs[Domain PCs] -->|hybrid join| entra
   entra -->|OIDC, in progress| nc[Nextcloud]
-  ad -->|LDAP, SavaPage-Users group| sp[SavaPage]
 ```
