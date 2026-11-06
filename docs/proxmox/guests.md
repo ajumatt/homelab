@@ -46,7 +46,7 @@ Default pattern is an unprivileged Debian LXC. VMs only where the OS demands it 
 ## Notes
 
 - Load leans toward pve (about 22 of 31 GB RAM used versus 7 on pve2 at one count). pve3 has room, but it's the smallest node at 15.3 GB of RAM.
-- VMIDs 119 and 120 were reused on pve3 after the Pterodactyl containers were deleted, and 112 after Homepage. 108 and 124 are free; the next new ID is 128.
+- VMIDs 119 and 120 were reused on pve3 after the Pterodactyl containers were deleted, and 112 after Homepage. 108 and 124 are free, and Proxmox suggests the lowest free ID first.
 - iventoy is privileged with `devices.allow a` and cleared `cap.drop`. It works, but it's the least isolated guest here and an open item.
 - LXCs that run Tailscale need the TUN device passed through in `/etc/pve/lxc/<id>.conf`.
 - QEMU guest agent is on for every VM. Without it Proxmox can't shut a VM down cleanly or report its IPs.
