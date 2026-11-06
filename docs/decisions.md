@@ -60,3 +60,19 @@ AP 1 rejects IoT clients for a reason that wasn't found after ruling out channel
 
 Linkwarden sits behind an Access policy, so Cloudflare blocks every request without a valid sign-in before it reaches the app. Nextcloud stays without Access and keeps the one rate-limiting rule the free plan allows.
 
+## Prometheus for alerts, Grafana optional
+
+Nothing else here keeps metrics over time or sends a push. Alert rules live in Prometheus and go out through Alertmanager, so they keep working with Grafana stopped. ProxCenter already charts per-guest Proxmox history; Grafana covers probes, temperatures and the DCs.
+
+## Public ntfy.sh with a private topic
+
+No push server to run or keep up. The random topic name is the only secret. The trade-off is that alerts need the internet, so a healthchecks.io heartbeat covers the case where the house itself goes offline.
+
+## Wazuh as the log destination; Splunk and Homepage retired
+
+Wazuh already collects from the nodes, the DCs and the Omada gear, and adds security rules. Splunk had no job left. Glance already showed everything Homepage did.
+
+## Wazuh patches itself, but only patch releases
+
+The daily watchdog snapshots the container, applies Debian updates and same-minor Wazuh releases, and rolls back if services aren't healthy five minutes later. Minor and major upgrades only get reported, because agents can't be newer than the manager and every agent is pinned.
+

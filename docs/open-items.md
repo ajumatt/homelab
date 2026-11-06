@@ -20,11 +20,26 @@
 
 ## Proxmox
 
-- Watch the Sunday backup run for the CIFS write error Escapepod hit once.
+- Backups to the CIFS share keep failing ([details](proxmox/storage-and-backups.md#backup-failures-on-the-cifs-share)). Get Escapepod a backup, split the job per node, and find out why the file server returns I/O errors.
+- Pick a storage option ([options](proxmox/storage-and-backups.md#storage-plan-not-decided)). Nextcloud's data disk has no backup until then.
+- Delete Splunk (108) and Homepage (112), and clear `onboot` on anything stopped on purpose so GuestStopped stays quiet.
+- Find out why iventoy reports about 21 GB of disk.
+- Confirm the e1000e offload fix holds on pve. Delete the old journal copy in `/root` when no longer needed.
+- Decide what the `ubuntu` scratch container (116) is for, or retire it.
 - Rebalance load from pve onto pve3.
 - NAS for shared storage, then HA.
 - Nextcloud data still lives on the file server's SMB share.
 - iventoy runs privileged with full device access.
+
+## Monitoring
+
+- Move prometheus, glance and proxcenter reservations out of the DHCP pool ([details](network/ip-plan.md#reservations-that-broke-the-rule)).
+- Check the cloudflared connectors from outside (an HTTP probe of a public hostname, or the tunnel's metrics port).
+- Forward Wazuh level 10 alerts to ntfy so rule 100100 pages the phone.
+- Omada syslog: confirm the AP traffic flood stopped and gateway DHCP lines still arrive; add rules for controller site events, admin logins and WAN events.
+- Prometheus `predict_linear` alert on the backup share, to warn well before the 85% rule.
+- Optional: a Grafana dashboard for the DCs.
+- Glance remote access at `home.example.com`.
 
 ## Active Directory
 
@@ -41,7 +56,6 @@
 ## Apps
 
 - SavaPage: Windows test, key backup, certificate by GPO, block direct printing, client rollout script ([details](apps/savapage.md#still-to-do)).
-- Splunk: check container resources against its requirements.
 - Escapepod: confirm the DNS rewrite lets Vector reach wire-pod from the IoT VLAN; fall back to a hidden Default SSID on AP 4 if not.
 - Escapepod: build and test the recognition patch on a real robot.
 - Linkwarden: update `NEXTAUTH_URL` to the public hostname and restart the stack.

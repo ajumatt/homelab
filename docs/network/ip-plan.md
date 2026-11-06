@@ -22,13 +22,13 @@ DHCP pool .10 to .100. No reservations yet. Vector sits at .50 inside the pool a
 
 | Address | Host |
 |---|---|
-| .50 | splunk (LXC on pve3) |
+| .50 | splunk (retired) |
 | .52 | network printer (behind SavaPage) |
 | .56 | Home Assistant (VM) |
 | .60 | grafana |
 | .63 | hermesagent |
 | .73 | iventoy |
-| .74 | homepage |
+| .74 | homepage (retired) |
 | .79 | ubuntu (test LXC) |
 | .81 | linkwarden |
 | .90 | wazuh |
@@ -43,7 +43,20 @@ DHCP pool .10 to .100. No reservations yet. Vector sits at .50 inside the pool a
 | .115 | sftpgo (controller backups) |
 | .120 | rustdeskserver |
 | .122 | AdGuard Home primary |
+| .135 | savapage |
 | .140 | cloudflared2 (tunnel connector 2) |
+
+## Reservations that broke the rule
+
+Three monitoring guests got reservations at the addresses they already had, which are inside the pool:
+
+| Address | Host |
+|---|---|
+| .150 | prometheus |
+| .196 | glance |
+| .202 | proxcenter |
+
+They work, but they shrink the pool and break the plan. All three should move into .50 to .149. Prometheus is the one to move carefully: blackbox probes, the DCs' firewall rules for windows_exporter, Grafana's data source and Glance all point at .150.
 
 ## Rules I follow
 

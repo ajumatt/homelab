@@ -1,4 +1,6 @@
-# Splunk Enterprise
+# Splunk Enterprise (retired)
+
+Retired in favor of Wazuh, which now collects the logs ([Wazuh](../monitoring/wazuh.md)). Splunk used about 1.4 GB of its 8 GB allocation and had no other job. Backed up, stopped, and cleared for deletion once pve3's 2026-11-01 backup was confirmed good. These notes stay for the install bug.
 
 LXC 108 on pve3, 10.10.1.50, web UI on port 8000. Installed with the [community-scripts ProxmoxVE](https://github.com/community-scripts/ProxmoxVE) Splunk Enterprise helper.
 

@@ -79,6 +79,10 @@ sequenceDiagram
   A->>P: FastCGI
 ```
 
+## Monitoring
+
+See [monitoring overview](monitoring/overview.md#how-an-alert-reaches-the-phone).
+
 ## Identity
 
 ```mermaid

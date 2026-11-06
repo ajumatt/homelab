@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-11-05
+
+- glance-helper replaces the calendar-only helper on the Glance container; adds homelab endpoints for alerts, temperatures, storage, backups, Home Assistant, Wazuh, the tunnel, Omada and certificate expiry.
+
+## 2026-11-01
+
+- Weekly backup: DC01, Escapepod and iventoy failed with zstd write errors to the CIFS share. DC01, DC02 and iventoy backed up on manual retries. Escapepod failed again alone with an I/O error from the share.
+- Splunk cleared for deletion after pve3's backup was confirmed good.
+
+## 2026-10-31
+
+- Wazuh watchdog on pve2: daily health check, pruning, agent report, snapshot-protected patching with rollback. First run upgraded Wazuh 4.14.8 to 4.14.9 and freed disk from 47% to 33%.
+- Omada syslog to Wazuh with custom decoders and rules for DHCP leases to known, unknown and randomized MACs. "More Detail Logs" turned off on the controller.
+
+## 2026-10-28
+
+- pve lost its network while still running; rebooted from the console. NIC offloads turned off on pve as a precaution against an e1000e hang.
+- journald on pve set to volatile so the Wazuh agent reads it correctly under log2ram.
+- Wazuh agents on all three nodes, DC02 and a workstation. Agent group `proxmox` streams node journals; rule 100100 alerts on the NIC hang.
+- Prometheus and Alertmanager in CT 125 with node, blackbox, pve and Windows exporters and ten alert rules, pushing to ntfy. Healthchecks.io heartbeat. Backup failures notify through a Proxmox webhook.
+- Grafana started and provisioned with three dashboards.
+- ProxCenter: duplicate cluster connections removed.
+- Homepage stopped for retirement. Glance's Home Assistant check fixed.
+
 ## 2026-10-23
 
 - Linkwarden joined to Tailscale (TUN passthrough on its LXC).
